@@ -22,7 +22,7 @@ std::string Shader::getShaderSource(const char* fileName) {
 }
 
 GLint Shader::compileShader(const char* shaderSrc, GLenum shaderType) {
-	GLint shader = glCreateShader(GL_VERTEX_SHADER);
+	GLint shader = glCreateShader(shaderType);
 	glShaderSource(shader, 1, &shaderSrc, NULL);
 	glCompileShader(shader);
 	int success;
@@ -44,6 +44,19 @@ void Shader::generateProgram(GLint& vertexShader, GLint& fragmentShader) {
 	glAttachShader(this->programId, vertexShader);
 	glAttachShader(this->programId, fragmentShader);
 	glLinkProgram(this->programId);
+
+	int success;
+	char infoLog[512];
+
+	glGetProgramiv(this->programId, GL_LINK_STATUS, &success);
+	if(!success) {
+	    glGetProgramInfoLog(this->programId, 512, NULL, infoLog);
+	    std::cout << infoLog << "\n";
+		std::stringstream stream;
+		stream << "There was an error linking the shader program";
+		throw std::runtime_error(stream.str());
+	}
+
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);

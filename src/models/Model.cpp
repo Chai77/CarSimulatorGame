@@ -50,10 +50,11 @@ Model::~Model() {
 }
 
 void Model::render() {
+	glBindVertexArray(this->VAO);
 	if(this->nrOfIndices > 0) {
-		std::cout << "Model is rendering" << "\n";
-		glDrawElements(GL_TRIANGLES, this->nrOfIndices, GL_FLOAT, NULL);
+		glDrawElements(GL_TRIANGLES, this->nrOfIndices, GL_UNSIGNED_INT, 0);
 	} else {
 		glDrawArrays(GL_TRIANGLES, 0, this->nrOfVertices);
 	}
+	glBindVertexArray(0);
 }

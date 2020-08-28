@@ -5,9 +5,9 @@ in vec2 vs_tex_coord;
 in vec3 vs_color;
 in vec3 vs_normal;
 
-out vec3 fs_color;
+out vec4 fs_color;
 
 void main() {
-	fs_color = vs_color;
+	fs_color = vec4(vs_color, 1.f);
 }
 
