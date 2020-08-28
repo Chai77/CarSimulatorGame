@@ -66,8 +66,8 @@ void DisplayManager::initWindow(const char* title, int width, int height, int gl
 	}
 
 	glfwSetFramebufferSizeCallback(window, this->screenResizeCallback);
-//	glfwGetFramebufferSize(window, &this->framebufferWidth, &this->framebufferHeight);
-//	glViewport(0, 0, this->framebufferWidth, this->framebufferHeight);
+	glfwGetFramebufferSize(window, &this->framebufferWidth, &this->framebufferHeight);
+	glViewport(0, 0, this->framebufferWidth, this->framebufferHeight);
 
 	glfwMakeContextCurrent(window);
 }
@@ -133,7 +133,7 @@ void DisplayManager::renderWindow() {
 		throw std::runtime_error("The window must be created first with DisplayManager::createWindow");
 	}
 	glfwSwapBuffers(window);
-	glFlush();
+	//glFlush();
 }
 
 void DisplayManager::destroyWindow() {
@@ -155,10 +155,4 @@ int DisplayManager::getScreenHeight() {
 
 bool DisplayManager::getWindowShouldClose() {
 	return glfwWindowShouldClose(window);
-}
-
-void DisplayManager::errorReceived(int messageType, const char* message) {
-	std::cout << "Is there something coming" << "\n";
-	std::cout << messageType << ": " << message << "\n";
-
 }

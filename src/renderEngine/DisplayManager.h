@@ -35,8 +35,6 @@ public:
 
 	static DisplayManager* getDisplay();
 	static void deleteDisplay();
-
-	static void errorReceived(int messageType, const char* message);
 };
 
 #endif

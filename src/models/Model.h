@@ -11,7 +11,7 @@ class Model {
 private:
 	Vertex* vertices;
 	int nrOfVertices;
-	GLint* indices;
+	GLuint* indices;
 	int nrOfIndices;
 
 	GLuint VAO;
@@ -21,10 +21,10 @@ private:
 	void initVAO();
 
 public:
-	Model(Vertex* vertices, int nrOfVertices, GLint* indices, int nrOfIndices);
-	~Model();
+	Model(Vertex* vertices, int nrOfVertices, GLuint* indices, int nrOfIndices);
+	virtual ~Model();
 
-	void render();
+	virtual void render();
 };
 
 #endif /* MODELS_MODEL_H_ */

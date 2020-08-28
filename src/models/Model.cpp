@@ -6,12 +6,12 @@ void Model::initVAO() {
 
 	glGenBuffers(1, &this->VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-	glBufferData(GL_ARRAY_BUFFER, this->nrOfVertices, this->vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, this->nrOfVertices * sizeof(Vertex), this->vertices, GL_STATIC_DRAW);
 
 	if(nrOfIndices > 0) {
 		glGenBuffers(1, &this->EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->nrOfIndices, this->indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->nrOfIndices * sizeof(GLuint), this->indices, GL_STATIC_DRAW);
 	}
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
@@ -29,7 +29,7 @@ void Model::initVAO() {
 	glBindVertexArray(0);
 }
 
-Model::Model(Vertex* vertices, int nrOfVertices, GLint* indices, int nrOfIndices) {
+Model::Model(Vertex* vertices, int nrOfVertices, GLuint* indices, int nrOfIndices) {
 	this->nrOfVertices = nrOfVertices;
 	this->nrOfIndices = nrOfIndices;
 
@@ -38,7 +38,7 @@ Model::Model(Vertex* vertices, int nrOfVertices, GLint* indices, int nrOfIndices
 		this->vertices[i] = vertices[i];
 	}
 
-	this->indices = new GLint[this->nrOfIndices];
+	this->indices = new GLuint[this->nrOfIndices];
 	for(int i = 0; i < nrOfIndices; i++) {
 		this->indices[i] = indices[i];
 	}
@@ -47,6 +47,9 @@ Model::Model(Vertex* vertices, int nrOfVertices, GLint* indices, int nrOfIndices
 }
 
 Model::~Model() {
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
 }
 
 void Model::render() {
@@ -57,4 +60,9 @@ void Model::render() {
 		glDrawArrays(GL_TRIANGLES, 0, this->nrOfVertices);
 	}
 	glBindVertexArray(0);
+}
+
+void Model::print() {
+	std::cout << "I am too cool to be true" << "\n";
+	std::cout << nrOfIndices << " " << nrOfVertices << "\n";
 }
