@@ -10,8 +10,12 @@ out vec2 vs_tex_coord;
 out vec3 vs_color;
 out vec3 vs_normal;
 
+uniform mat4 ModelMatrix;
+uniform mat4 ProjectionMatrix;
+uniform mat4 ViewMatrix;
+
 void main() {
-	gl_Position = vec4(position, 1.f);
+	gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * vec4(position, 1.f);
 	
 	vs_position = position;
 	vs_tex_coord = tex_coord;

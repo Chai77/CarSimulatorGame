@@ -5,6 +5,7 @@
 #include <glm.hpp>
 #include <vec3.hpp>
 #include <vec2.hpp>
+#include "models/TextureMesh.h"
 
 Vertex vertices[] = {
 	//Position								//Texcoords						//Color						//Normals
@@ -22,7 +23,9 @@ unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
 
 int main() {
 	Game game("CarSimulator", 640, 480, GLFW_FALSE, 4, 5);
-	Model* model = new Model(vertices, nrOfVertices, indices, nrOfIndices);
+	std::vector<Mesh*> meshes;
+	meshes.push_back(new TextureMesh(vertices, nrOfVertices, indices, nrOfIndices, "./images/texture.png"));
+	Model* model = new Model(meshes);
 	game.addModel(model);
 	game.startGameLoop();
 	return 0;

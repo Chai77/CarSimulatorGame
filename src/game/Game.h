@@ -18,11 +18,24 @@ private:
 
 	std::vector<Model*> models;
 
+	const float FOV;
+	const float nearPlane;
+	const float farPlane;
+	glm::mat4 ProjectionMatrix;
+	glm::mat4 ViewMatrix;
+
 	void initDisplay(const char* title, int width, int height, GLenum resizable);
 	void initRenderer();
 
+	void render();
+	void update();
+	void updateProjectionMatrix();
+	void updateViewMatrix();
+
 public:
-	Game(const char* title, int width, int height, GLenum resizable, int OPENGL_VERSION_MAJOR, int OPENGL_VERSION_MINOR);
+	Game(const char* title, int width, int height, GLenum resizable,
+			int OPENGL_VERSION_MAJOR, int OPENGL_VERSION_MINOR,
+			const float FOV=45.f, const float nearPlane=0.1f, const float farPlane=1000.f);
 	~Game();
 
 	void startGameLoop();

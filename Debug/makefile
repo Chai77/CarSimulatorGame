@@ -8,8 +8,10 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include src/textures/subdir.mk
 -include src/shaders/subdir.mk
 -include src/renderEngine/subdir.mk
+-include src/models/mesh/subdir.mk
 -include src/models/subdir.mk
 -include src/game/subdir.mk
 -include src/subdir.mk
@@ -48,7 +50,7 @@ all: CarSimulatorGame
 CarSimulatorGame: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/home/chaitanya/Documents/Projects/CarSimulatorGame/Dependencies/GLEW/libs" -L"/home/chaitanya/Documents/Projects/CarSimulatorGame/Dependencies/GLFW/libs" -o "CarSimulatorGame" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/home/chaitanya/Documents/Projects/CarSimulatorGame/Dependencies/GLEW/libs" -L"/home/chaitanya/Documents/Projects/CarSimulatorGame/Dependencies/SOIL/libs" -L"/home/chaitanya/Documents/Projects/CarSimulatorGame/Dependencies/GLFW/libs" -o "CarSimulatorGame" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

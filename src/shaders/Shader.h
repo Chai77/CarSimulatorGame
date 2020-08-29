@@ -8,6 +8,12 @@
 #include <stdexcept>
 
 #include <GL/glew.h>
+#include <glm.hpp>
+#include <mat4x4.hpp>
+#include <vec3.hpp>
+#include <vec4.hpp>
+#include <vec2.hpp>
+#include <gtc/type_ptr.hpp>
 
 class Shader {
 private:
@@ -22,6 +28,9 @@ public:
 
 	void use();
 	void unuse();
+
+	void seti(const char* name, int value);
+	void setMat4f(const char* name, glm::mat4 value);
 };
 
 #endif /* SHADERS_SHADER_H_ */

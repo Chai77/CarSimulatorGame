@@ -14,9 +14,14 @@ void Renderer::prepare() {
 }
 
 void Renderer::renderModels(std::vector<Model*> models) {
-	shader->use();
+	this->shader->use();
 	for (auto& model : models) {
-		model->render();
+		model->render(this->shader);
 	}
-	shader->unuse();
+	this->shader->unuse();
+}
+
+void Renderer::setUniforms(glm::mat4 ViewMatrix, glm::mat4 ProjectionMatrix) {
+	this->shader->setMat4f("ViewMatrix", ViewMatrix);
+	this->shader->setMat4f("ProjectionMatrix", ProjectionMatrix);
 }

@@ -86,3 +86,15 @@ void Shader::use() {
 void Shader::unuse() {
 	glUseProgram(0);
 }
+
+void Shader::seti(const char* name, int value) {
+	this->use();
+	glUniform1i(glGetUniformLocation(this->programId, name), value);
+	this->unuse();
+}
+
+void Shader::setMat4f(const char* name, glm::mat4 value) {
+	this->use();
+	glUniformMatrix4fv(glGetUniformLocation(this->programId, name), 1, GL_FALSE, glm::value_ptr(value));
+	this->unuse();
+}

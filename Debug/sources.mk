@@ -26,6 +26,8 @@ SUBDIRS := \
 src \
 src/game \
 src/models \
+src/models/mesh \
 src/renderEngine \
 src/shaders \
+src/textures \
 
